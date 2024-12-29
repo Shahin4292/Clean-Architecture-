@@ -22,3 +22,12 @@ class ServerErrorException extends AppException {
   ServerErrorException([String? message])
       : super(message, 'Internal Server Error');
 }
+
+class InvalidUrlException extends AppException {
+  InvalidUrlException([String? message]) : super(message, 'Invalid Url');
+}
+
+class FetchDataException extends AppException {
+  FetchDataException([String? message])
+      : super(message, '');
+}
