@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
+
+import '../res/colors/app_color.dart';
 
 class Utils {
   static void fieldFocusChange(
@@ -10,15 +11,30 @@ class Utils {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  static showToastMessage(String message) {
+  static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,
-      backgroundColor: Colors.blue,
+      backgroundColor: AppColor.blackColor,
+      textColor: AppColor.whiteColor,
+      gravity: ToastGravity.BOTTOM,
+      toastLength: Toast.LENGTH_LONG,
+    );
+  }
+
+  static toastMessageCenter(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: AppColor.blackColor,
       gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_LONG,
+      textColor: AppColor.whiteColor,
     );
   }
 
   static snackBar(String title, String message) {
-    Get.snackbar(title, message);
+    Get.snackbar(
+      title,
+      message,
+    );
   }
 }

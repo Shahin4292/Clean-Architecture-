@@ -1,11 +1,11 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:mvvm_architucture/data/app_exception.dart';
-import 'package:mvvm_architucture/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
+
+import '../app_exception.dart';
+import 'base_api_services.dart';
 
 class NetworkApiServices extends BaseApiServices {
   @override
@@ -13,6 +13,7 @@ class NetworkApiServices extends BaseApiServices {
     if (kDebugMode) {
       print(url);
     }
+
     dynamic responseJson;
     try {
       final response =
@@ -20,27 +21,33 @@ class NetworkApiServices extends BaseApiServices {
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
-    } on TimeoutException {
+    } on RequestTimeOut {
       throw RequestTimeOut('');
     }
+    print(responseJson);
     return responseJson;
   }
 
   @override
   Future<dynamic> postApi(var data, String url) async {
     if (kDebugMode) {
+      print(url);
       print(data);
     }
+
     dynamic responseJson;
     try {
       final response = await http
-          .post(Uri.parse(url), body: jsonEncode(data))
+          .post(Uri.parse(url), body: data)
           .timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
-    } on TimeoutException {
+    } on RequestTimeOut {
       throw RequestTimeOut('');
+    }
+    if (kDebugMode) {
+      print(responseJson);
     }
     return responseJson;
   }
@@ -48,14 +55,16 @@ class NetworkApiServices extends BaseApiServices {
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        double responseJson = jsonDecode(response.body);
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
+      case 400:
+        dynamic responseJson = jsonDecode(response.body);
         return responseJson;
 
-      case 400:
-        throw InvalidUrlException;
       default:
         throw FetchDataException(
-            'Error occurred while communication with server${response.statusCode.toString()}');
+            'Error occurred while communicating with server ' +
+                response.statusCode.toString());
     }
   }
 }

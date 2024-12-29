@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 
-import '../res/components/internet_exception_widget.dart';
+import '../view_models/services/splash_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,11 +10,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SplashService splashService = SplashService();
+
+  @override
+  void initState() {
+    splashService.isLogin();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       appBar: AppBar(),
+      body: const Center(child: Text('WellCome')),
     );
   }
 }
