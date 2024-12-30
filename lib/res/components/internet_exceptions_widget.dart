@@ -24,7 +24,7 @@ class _InterNetExceptionWidgetState extends State<InterNetExceptionWidget> {
           SizedBox(
             height: height * .15,
           ),
-          Icon(
+          const Icon(
             Icons.cloud_off,
             color: AppColor.redColor,
             size: 50,

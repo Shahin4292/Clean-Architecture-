@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mvvm_architucture/views/login/widgets/input_email_widget.dart';
-import 'package:mvvm_architucture/views/login/widgets/input_password_widget.dart';
-import 'package:mvvm_architucture/views/login/widgets/login_button_widget.dart';
+import 'package:mvvm_architucture/view/login/widgets/input_email_widget.dart';
+import 'package:mvvm_architucture/view/login/widgets/input_password_widget.dart';
+import 'package:mvvm_architucture/view/login/widgets/login_button_widget.dart';
 
-import '../../data/response/status.dart';
 import '../../view_models/controller/login/login_view_model.dart';
+
+
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -15,8 +16,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final loginVM = Get.put(LoginViewModel());
 
+  final loginVM = Get.put(LoginViewModel()) ;
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -24,7 +25,7 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading:false,
         title: Text('login'.tr),
       ),
       body: Padding(
@@ -38,19 +39,15 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   InputEmailWidget(),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20,),
                   InputPasswordWidget(),
+
                 ],
               ),
             ),
-            const SizedBox(
-              height: 40,
-            ),
-            LoginButtonWidget(
-              formKey: _formkey,
-            )
+
+            const SizedBox(height: 40,),
+            LoginButtonWidget(formKey: _formkey,)
           ],
         ),
       ),

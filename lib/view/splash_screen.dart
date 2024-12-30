@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../view_models/services/splash_service.dart';
+import '../view_models/services/splash_services.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,20 +12,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  SplashService splashService = SplashService();
+
+  SplashServices splashScreen = SplashServices();
 
   @override
   void initState() {
-    splashService.isLogin();
+    // TODO: implement initState
     super.initState();
+    splashScreen.isLogin();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.greenAccent,
-      appBar: AppBar(),
-      body: const Center(child: Text('WellCome')),
+    return  Scaffold(
+      backgroundColor: Colors.teal,
+      body: Center(child: Text('welcome_back'.tr, textAlign: TextAlign.center,)),
     );
   }
 }
